@@ -1,0 +1,88 @@
+# FastAPI Origin Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: game-origin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: game-origin
+  template:
+    metadata:
+      labels:
+        app: game-origin
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: /metrics
+        prometheus.io/port: "8000"
+    spec:
+      containers:
+        - name: origin
+          image: alfredsaccount/live-game-origin:v1
+          imagePullPolicy: IfNotPresent
+
+          ports:
+            - containerPort: 8000
+              name: http
+
+          # Kubernetes ConfigMap and Secret
+          envFrom:
+            - configMapRef:
+                name: game-origin-config
+            - secretRef:
+                name: game-db-secret
+
+          # Startup probe
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            periodSeconds: 5
+            failureThreshold: 24
+
+          # Readiness probe (checks PostgreSQL connection)
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          # Liveness probe
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 10001
+            capabilities:
+              drop: ["ALL"]
+
+---
+# FastAPI Origin Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: game-origin
+spec:
+  type: ClusterIP
+  selector:
+    app: game-origin
+  ports:
+    - name: http
+      port: 8000
+      targetPort: 8000

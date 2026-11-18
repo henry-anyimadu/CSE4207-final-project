@@ -1,0 +1,29 @@
+# Lab 5-style hostPath PV + pinned PVC, suitable for a SINGLE-NODE Minikube demo.
+# Do not use hostPath for a multi-node production cluster.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: game-postgres-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual
+  hostPath:
+    path: /mnt/live-game-postgres
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: game-postgres-pvc
+spec:
+  storageClassName: manual
+  volumeName: game-postgres-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

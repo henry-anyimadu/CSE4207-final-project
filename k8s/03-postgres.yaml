@@ -1,0 +1,76 @@
+# PostgreSQL Headless Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: game-postgres
+spec:
+  clusterIP: None
+  selector:
+    app: game-postgres
+  ports:
+    - name: postgres
+      port: 5432
+      targetPort: 5432
+---
+# PostgreSQL StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: game-postgres
+spec:
+  serviceName: game-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: game-postgres
+
+  template:
+    metadata:
+      labels:
+        app: game-postgres
+
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16
+
+          ports:
+            - containerPort: 5432
+              name: postgres
+
+          # Kubernetes Secret and ConfigMap
+          envFrom:
+            - secretRef:
+                name: game-db-secret
+            - configMapRef:
+                name: game-origin-config
+
+          env:
+            - name: PGDATA
+              value: /var/lib/postgresql/data/pgdata
+
+          volumeMounts:
+            - name: database-data
+              mountPath: /var/lib/postgresql/data
+
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - 'pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 100m
+            limits:
+              memory: 512Mi
+              cpu: 500m
+
+      volumes:
+        - name: database-data
+          persistentVolumeClaim:
+            claimName: game-postgres-pvc

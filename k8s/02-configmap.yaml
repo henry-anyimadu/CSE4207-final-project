@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: game-origin-config
+data:
+  DB_HOST: game-postgres
+  DB_PORT: "5432"

@@ -1,0 +1,16 @@
+{
+  "event_id": "match102-1876c8-event46",
+  "match_id": 102,
+  "run_id": "1876c8",
+  "seq": 46,
+  "type": "assist",
+  "timestamp": "2026-01-01T00:00:04Z",
+  "game_time_s": 4.0,
+  "player_id": "m102p04",
+  "target_player_id": "m102p03",
+  "team_id": "orange",
+  "points": 50,
+  "stat": "assists",
+  "value": 1,
+  "team_score_delta": 0
+}

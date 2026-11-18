@@ -1,0 +1,14 @@
+# Baseline for the k6 cache-on / cache-bypass / direct-origin runs.
+# One endless arena match (id 101) at a fixed 5 actions/s so every benchmark run
+# sees the same write load and the same event sequence (fixed seed).
+seed: 4207
+sink: http
+http:
+  origin_url: http://origin:8000
+matches:
+  - mode: arena
+    count: 1
+    match_id_start: 101
+    players: 12
+    actions_per_second: 5
+    duration_s: 0          # endless: the leaderboard never "finishes" mid-benchmark

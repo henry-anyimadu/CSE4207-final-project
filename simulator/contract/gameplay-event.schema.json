@@ -1,0 +1,473 @@
+{
+  "$defs": {
+    "EventType": {
+      "enum": [
+        "match_start",
+        "match_end",
+        "tick",
+        "kill",
+        "death",
+        "assist",
+        "damage",
+        "headshot",
+        "goal",
+        "shot",
+        "save",
+        "demo"
+      ],
+      "title": "EventType",
+      "type": "string"
+    },
+    "GameMode": {
+      "enum": [
+        "arena",
+        "rocket"
+      ],
+      "title": "GameMode",
+      "type": "string"
+    },
+    "MatchEndPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "match_end",
+          "default": "match_end",
+          "title": "Kind",
+          "type": "string"
+        },
+        "reason": {
+          "enum": [
+            "time_expired",
+            "overtime_goal",
+            "score_limit",
+            "shutdown"
+          ],
+          "title": "Reason",
+          "type": "string"
+        },
+        "elapsed_s": {
+          "title": "Elapsed S",
+          "type": "number"
+        },
+        "team_scores": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Team Scores",
+          "type": "object"
+        },
+        "winner_team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Winner Team Id"
+        },
+        "winner_player_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Winner Player Id"
+        }
+      },
+      "required": [
+        "reason",
+        "elapsed_s"
+      ],
+      "title": "MatchEndPayload",
+      "type": "object"
+    },
+    "MatchStartPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "match_start",
+          "default": "match_start",
+          "title": "Kind",
+          "type": "string"
+        },
+        "run_id": {
+          "description": "Hash of seed + match config; also embedded in every event_id",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/$defs/GameMode"
+        },
+        "duration_s": {
+          "description": "Regulation length; 0 = endless match",
+          "title": "Duration S",
+          "type": "integer"
+        },
+        "stats": {
+          "description": "Per-player counters this match will produce",
+          "items": {
+            "type": "string"
+          },
+          "title": "Stats",
+          "type": "array"
+        },
+        "teams": {
+          "description": "Empty for free-for-all",
+          "items": {
+            "$ref": "#/$defs/TeamInfo"
+          },
+          "title": "Teams",
+          "type": "array"
+        },
+        "players": {
+          "items": {
+            "$ref": "#/$defs/PlayerInfo"
+          },
+          "title": "Players",
+          "type": "array"
+        }
+      },
+      "required": [
+        "run_id",
+        "mode",
+        "duration_s",
+        "stats",
+        "players"
+      ],
+      "title": "MatchStartPayload",
+      "type": "object"
+    },
+    "PlayerInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "player_id": {
+          "title": "Player Id",
+          "type": "string"
+        },
+        "display_name": {
+          "title": "Display Name",
+          "type": "string"
+        },
+        "team_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Team Id"
+        }
+      },
+      "required": [
+        "player_id",
+        "display_name"
+      ],
+      "title": "PlayerInfo",
+      "type": "object"
+    },
+    "PlayerState": {
+      "additionalProperties": false,
+      "properties": {
+        "player_id": {
+          "title": "Player Id",
+          "type": "string"
+        },
+        "pos": {
+          "$ref": "#/$defs/Vec3"
+        },
+        "boost": {
+          "anyOf": [
+            {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Rocket mode only",
+          "title": "Boost"
+        },
+        "health": {
+          "anyOf": [
+            {
+              "maximum": 100,
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Arena mode only",
+          "title": "Health"
+        }
+      },
+      "required": [
+        "player_id",
+        "pos"
+      ],
+      "title": "PlayerState",
+      "type": "object"
+    },
+    "TeamInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "team_id": {
+          "title": "Team Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "team_id",
+        "name"
+      ],
+      "title": "TeamInfo",
+      "type": "object"
+    },
+    "TickPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "tick",
+          "default": "tick",
+          "title": "Kind",
+          "type": "string"
+        },
+        "time_remaining_s": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "None for endless matches",
+          "title": "Time Remaining S"
+        },
+        "overtime": {
+          "default": false,
+          "title": "Overtime",
+          "type": "boolean"
+        },
+        "team_scores": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Team Scores",
+          "type": "object"
+        },
+        "ball": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Vec3"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "players": {
+          "items": {
+            "$ref": "#/$defs/PlayerState"
+          },
+          "title": "Players",
+          "type": "array"
+        }
+      },
+      "required": [
+        "time_remaining_s",
+        "players"
+      ],
+      "title": "TickPayload",
+      "type": "object"
+    },
+    "Vec3": {
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "title": "X",
+          "type": "number"
+        },
+        "y": {
+          "title": "Y",
+          "type": "number"
+        },
+        "z": {
+          "default": 0.0,
+          "title": "Z",
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "title": "Vec3",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "One POST body sent to ``/matches/{match_id}/events``.",
+  "properties": {
+    "event_id": {
+      "description": "Globally unique, deterministic; use for dedup",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "match_id": {
+      "title": "Match Id",
+      "type": "integer"
+    },
+    "run_id": {
+      "description": "Same for every event of one simulator run of this match",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "seq": {
+      "description": "Strictly increasing per match; 0 is match_start",
+      "minimum": 0,
+      "title": "Seq",
+      "type": "integer"
+    },
+    "type": {
+      "$ref": "#/$defs/EventType"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    },
+    "game_time_s": {
+      "description": "Seconds since match start (simulated clock)",
+      "title": "Game Time S",
+      "type": "number"
+    },
+    "player_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Player Id"
+    },
+    "target_player_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Target Player Id"
+    },
+    "team_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Team Id"
+    },
+    "points": {
+      "default": 0,
+      "title": "Points",
+      "type": "integer"
+    },
+    "stat": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Counter to increment, e.g. 'kills'",
+      "title": "Stat"
+    },
+    "value": {
+      "default": 1,
+      "description": "Amount added to `stat`",
+      "title": "Value",
+      "type": "integer"
+    },
+    "team_score_delta": {
+      "default": 0,
+      "title": "Team Score Delta",
+      "type": "integer"
+    },
+    "payload": {
+      "anyOf": [
+        {
+          "discriminator": {
+            "mapping": {
+              "match_end": "#/$defs/MatchEndPayload",
+              "match_start": "#/$defs/MatchStartPayload",
+              "tick": "#/$defs/TickPayload"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MatchStartPayload"
+            },
+            {
+              "$ref": "#/$defs/TickPayload"
+            },
+            {
+              "$ref": "#/$defs/MatchEndPayload"
+            }
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Payload"
+    }
+  },
+  "required": [
+    "event_id",
+    "match_id",
+    "run_id",
+    "seq",
+    "type",
+    "timestamp",
+    "game_time_s"
+  ],
+  "title": "GameplayEvent",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

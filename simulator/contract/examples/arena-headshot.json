@@ -1,0 +1,15 @@
+{
+  "event_id": "match101-e00612-event63",
+  "match_id": 101,
+  "run_id": "e00612",
+  "seq": 63,
+  "type": "headshot",
+  "timestamp": "2026-01-01T00:00:03.400000Z",
+  "game_time_s": 3.4,
+  "player_id": "m101p04",
+  "target_player_id": "m101p02",
+  "points": 25,
+  "stat": "headshots",
+  "value": 1,
+  "team_score_delta": 0
+}

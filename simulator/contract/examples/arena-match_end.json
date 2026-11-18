@@ -1,0 +1,19 @@
+{
+  "event_id": "match101-e00612-event601",
+  "match_id": 101,
+  "run_id": "e00612",
+  "seq": 601,
+  "type": "match_end",
+  "timestamp": "2026-01-01T00:00:30Z",
+  "game_time_s": 30.0,
+  "points": 0,
+  "value": 0,
+  "team_score_delta": 0,
+  "payload": {
+    "kind": "match_end",
+    "reason": "time_expired",
+    "elapsed_s": 30.0,
+    "team_scores": {},
+    "winner_player_id": "m101p02"
+  }
+}

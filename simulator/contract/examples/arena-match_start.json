@@ -1,0 +1,44 @@
+{
+  "event_id": "match101-e00612-event0",
+  "match_id": 101,
+  "run_id": "e00612",
+  "seq": 0,
+  "type": "match_start",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "game_time_s": 0.0,
+  "points": 0,
+  "value": 0,
+  "team_score_delta": 0,
+  "payload": {
+    "kind": "match_start",
+    "run_id": "e00612",
+    "mode": "arena",
+    "duration_s": 30,
+    "stats": [
+      "kills",
+      "deaths",
+      "assists",
+      "damage",
+      "headshots"
+    ],
+    "teams": [],
+    "players": [
+      {
+        "player_id": "m101p01",
+        "display_name": "RapidNarwhal"
+      },
+      {
+        "player_id": "m101p02",
+        "display_name": "NeonRocket"
+      },
+      {
+        "player_id": "m101p03",
+        "display_name": "LunarViper16"
+      },
+      {
+        "player_id": "m101p04",
+        "display_name": "GoldenTaco"
+      }
+    ]
+  }
+}

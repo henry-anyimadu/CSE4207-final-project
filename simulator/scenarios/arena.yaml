@@ -1,0 +1,13 @@
+# "State 1" from the design meeting: a small free-for-all leaderboard.
+# Change `players` and `stats` to control leaderboard size/width.
+seed: 4207
+matches:
+  - mode: arena
+    count: 1
+    match_id_start: 101
+    players: 16                       # 2-100
+    stats: [kills, deaths, assists, damage, headshots]   # kills+deaths required
+    actions_per_second: 5
+    tick_hz: 2                        # positions + health snapshots (0 = off)
+    duration_s: 300
+    on_end: restart                   # start a new match (new id) when this one ends

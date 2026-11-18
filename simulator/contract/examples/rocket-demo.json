@@ -1,0 +1,16 @@
+{
+  "event_id": "match102-1876c8-event10",
+  "match_id": 102,
+  "run_id": "1876c8",
+  "seq": 10,
+  "type": "demo",
+  "timestamp": "2026-01-01T00:00:01Z",
+  "game_time_s": 1.0,
+  "player_id": "m102p01",
+  "target_player_id": "m102p04",
+  "team_id": "blue",
+  "points": 25,
+  "stat": "demos",
+  "value": 1,
+  "team_score_delta": 0
+}

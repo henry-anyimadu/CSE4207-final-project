@@ -1,0 +1,15 @@
+{
+  "event_id": "match101-e00612-event5",
+  "match_id": 101,
+  "run_id": "e00612",
+  "seq": 5,
+  "type": "kill",
+  "timestamp": "2026-01-01T00:00:00.400000Z",
+  "game_time_s": 0.4,
+  "player_id": "m101p03",
+  "target_player_id": "m101p01",
+  "points": 100,
+  "stat": "kills",
+  "value": 1,
+  "team_score_delta": 0
+}

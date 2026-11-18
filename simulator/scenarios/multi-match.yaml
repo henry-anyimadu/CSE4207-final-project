@@ -1,0 +1,17 @@
+# Several games at once: 4 free-for-all + 2 team-deathmatch arenas.
+seed: 4207
+matches:
+  - mode: arena
+    count: 4                          # ids 101-104
+    players: 12
+    actions_per_second: 3
+    duration_s: 600
+    on_end: restart
+  - mode: arena
+    count: 2                          # ids 105-106
+    players: 10
+    teams: 2
+    score_limit: 50                   # first team to 50 kills wins
+    actions_per_second: 4
+    duration_s: 600
+    on_end: restart

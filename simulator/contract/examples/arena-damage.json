@@ -1,0 +1,15 @@
+{
+  "event_id": "match101-e00612-event1",
+  "match_id": 101,
+  "run_id": "e00612",
+  "seq": 1,
+  "type": "damage",
+  "timestamp": "2026-01-01T00:00:00.200000Z",
+  "game_time_s": 0.2,
+  "player_id": "m101p02",
+  "target_player_id": "m101p03",
+  "points": 0,
+  "stat": "damage",
+  "value": 37,
+  "team_score_delta": 0
+}

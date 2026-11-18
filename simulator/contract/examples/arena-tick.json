@@ -1,0 +1,56 @@
+{
+  "event_id": "match101-e00612-event12",
+  "match_id": 101,
+  "run_id": "e00612",
+  "seq": 12,
+  "type": "tick",
+  "timestamp": "2026-01-01T00:00:01Z",
+  "game_time_s": 1.0,
+  "points": 0,
+  "value": 0,
+  "team_score_delta": 0,
+  "payload": {
+    "kind": "tick",
+    "time_remaining_s": 29.0,
+    "overtime": false,
+    "team_scores": {},
+    "players": [
+      {
+        "player_id": "m101p01",
+        "pos": {
+          "x": 67.01,
+          "y": 14.16,
+          "z": 0.0
+        },
+        "health": 23
+      },
+      {
+        "player_id": "m101p02",
+        "pos": {
+          "x": 57.51,
+          "y": 29.14,
+          "z": 0.0
+        },
+        "health": 100
+      },
+      {
+        "player_id": "m101p03",
+        "pos": {
+          "x": 9.76,
+          "y": 21.29,
+          "z": 0.0
+        },
+        "health": 25
+      },
+      {
+        "player_id": "m101p04",
+        "pos": {
+          "x": 8.48,
+          "y": 39.84,
+          "z": 0.0
+        },
+        "health": 100
+      }
+    ]
+  }
+}

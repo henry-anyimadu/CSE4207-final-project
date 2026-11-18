@@ -1,0 +1,12 @@
+# Large, intensive games: Rocket League-style 3v3 with live telemetry
+# (car positions, boost 0-100, ball position, clock) at 10 Hz.
+seed: 4207
+matches:
+  - mode: rocket
+    count: 2                          # ids 101-102
+    team_size: 3
+    actions_per_second: 0.5           # shots / saves / goals / demos
+    tick_hz: 10
+    duration_s: 300                   # ties go to sudden-death overtime
+    max_overtime_s: 300
+    on_end: restart

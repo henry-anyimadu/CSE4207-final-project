@@ -1,0 +1,17 @@
+# Heavy write load to stress the origin: 20 rocket matches at 30 Hz telemetry
+# plus 10 arenas (roughly 840 POST/s total). Watch gamesim_schedule_lag_seconds.
+seed: 4207
+http:
+  concurrency_per_match: 8
+matches:
+  - mode: rocket
+    count: 20
+    actions_per_second: 1
+    tick_hz: 30
+    duration_s: 300
+    on_end: restart
+  - mode: arena
+    count: 10
+    players: 20
+    actions_per_second: 10
+    duration_s: 0

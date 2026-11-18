@@ -1,0 +1,57 @@
+{
+  "event_id": "match102-1876c8-event0",
+  "match_id": 102,
+  "run_id": "1876c8",
+  "seq": 0,
+  "type": "match_start",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "game_time_s": 0.0,
+  "points": 0,
+  "value": 0,
+  "team_score_delta": 0,
+  "payload": {
+    "kind": "match_start",
+    "run_id": "1876c8",
+    "mode": "rocket",
+    "duration_s": 60,
+    "stats": [
+      "goals",
+      "assists",
+      "shots",
+      "saves",
+      "demos"
+    ],
+    "teams": [
+      {
+        "team_id": "blue",
+        "name": "Blue"
+      },
+      {
+        "team_id": "orange",
+        "name": "Orange"
+      }
+    ],
+    "players": [
+      {
+        "player_id": "m102p01",
+        "display_name": "HyperBison",
+        "team_id": "blue"
+      },
+      {
+        "player_id": "m102p02",
+        "display_name": "CosmicBadger",
+        "team_id": "blue"
+      },
+      {
+        "player_id": "m102p03",
+        "display_name": "GoldenNarwhal",
+        "team_id": "orange"
+      },
+      {
+        "player_id": "m102p04",
+        "display_name": "BraveFerret64",
+        "team_id": "orange"
+      }
+    ]
+  }
+}

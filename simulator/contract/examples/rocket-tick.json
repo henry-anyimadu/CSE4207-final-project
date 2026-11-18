@@ -1,0 +1,64 @@
+{
+  "event_id": "match102-1876c8-event1",
+  "match_id": 102,
+  "run_id": "1876c8",
+  "seq": 1,
+  "type": "tick",
+  "timestamp": "2026-01-01T00:00:00.100000Z",
+  "game_time_s": 0.1,
+  "points": 0,
+  "value": 0,
+  "team_score_delta": 0,
+  "payload": {
+    "kind": "tick",
+    "time_remaining_s": 59.9,
+    "overtime": false,
+    "team_scores": {
+      "blue": 0,
+      "orange": 0
+    },
+    "ball": {
+      "x": -1.9,
+      "y": 30.8,
+      "z": 92.8
+    },
+    "players": [
+      {
+        "player_id": "m102p01",
+        "pos": {
+          "x": -975.7,
+          "y": -2312.9,
+          "z": 17.0
+        },
+        "boost": 30
+      },
+      {
+        "player_id": "m102p02",
+        "pos": {
+          "x": 1012.1,
+          "y": -3063.0,
+          "z": 17.0
+        },
+        "boost": 33
+      },
+      {
+        "player_id": "m102p03",
+        "pos": {
+          "x": -1066.5,
+          "y": 2366.3,
+          "z": 253.9
+        },
+        "boost": 30
+      },
+      {
+        "player_id": "m102p04",
+        "pos": {
+          "x": 1045.9,
+          "y": 2939.2,
+          "z": 17.0
+        },
+        "boost": 33
+      }
+    ]
+  }
+}

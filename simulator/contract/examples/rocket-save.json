@@ -1,0 +1,16 @@
+{
+  "event_id": "match102-1876c8-event33",
+  "match_id": 102,
+  "run_id": "1876c8",
+  "seq": 33,
+  "type": "save",
+  "timestamp": "2026-01-01T00:00:03Z",
+  "game_time_s": 3.0,
+  "player_id": "m102p03",
+  "target_player_id": "m102p02",
+  "team_id": "orange",
+  "points": 50,
+  "stat": "saves",
+  "value": 1,
+  "team_score_delta": 0
+}
